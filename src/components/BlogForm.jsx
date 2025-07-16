@@ -1,33 +1,32 @@
 import { useState } from "react";
 
-const BlogForm = ({ onSubmit }) => {
+function BlogForm({ onSubmit }) {
   const [url, setUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (url.trim()) {
-      onSubmit(url);
-      setUrl(""); // Clear input after submission
-    }
+    if (!url) return;
+    onSubmit(url);
+    setUrl("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-x-2">
       <input
         type="text"
+        placeholder="Enter blog URL"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        placeholder="Enter blog URL"
-        className="w-full p-2 border rounded"
+        className="px-3 py-2 rounded border"
       />
       <button
         type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-blue-600 text-white px-4 py-2 rounded"
       >
         Summarize
       </button>
     </form>
   );
-};
+}
 
 export default BlogForm;
